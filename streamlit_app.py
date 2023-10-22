@@ -13,23 +13,17 @@ Fork this repo, and edit `/streamlit_app.py` to customize this app to your heart
 with st.echo():
     from selenium import webdriver
     from selenium.webdriver.chrome.options import Options
-    from selenium.webdriver.chrome.service import Service
-    from webdriver_manager.chrome import ChromeDriverManager
-
-    @st.cache_resource
-    def get_driver():
-        # Get the chromium version
-        chromium_version = "118.0.5993.70-1~deb11u1"
-        
-        # Install and get the ChromeDriver path
-        chrome_driver_path = ChromeDriverManager(chrome_type=ChromeType.GOOGLE, version=chromium_version).install()
-
-        return webdriver.Chrome(service=Service(chrome_driver_path), options=options)
-
+    
     options = Options()
     options.add_argument('--disable-gpu')
     options.add_argument('--headless')
-
+    options.add_argument("--no-sandbox")
+    options.add_experimental_option("detach", True)
+    
+    @st.cache_resource
+    def get_driver():
+        return webdriver.Chrome(options=options)
+    
     driver = get_driver()
     driver.get("http://example.com")
 
