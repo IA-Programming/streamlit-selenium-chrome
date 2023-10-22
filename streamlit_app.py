@@ -18,7 +18,13 @@ with st.echo():
 
     @st.cache_resource
     def get_driver():
-        return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+        # Get the chromium version
+        chromium_version = "118.0.5993.70-1~deb11u1"
+        
+        # Install and get the ChromeDriver path
+        chrome_driver_path = ChromeDriverManager(chrome_type=ChromeType.GOOGLE, version=chromium_version).install()
+
+        return webdriver.Chrome(service=Service(chrome_driver_path), options=options)
 
     options = Options()
     options.add_argument('--disable-gpu')
