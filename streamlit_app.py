@@ -1,3 +1,4 @@
+from time import time
 import streamlit as st
 
 """
@@ -22,7 +23,12 @@ with st.echo():
     
     @st.cache_resource
     def get_driver():
-        return webdriver.Chrome(options=options)
+        start_time = time()
+        driver = webdriver.Chrome(options=options)
+        end_time = time()
+        elapsed_time = end_time - start_time
+        st.write(f"Chrome-driver loaded in {elapsed_time:.4f} seconds")
+        return driver
     
     driver = get_driver()
     driver.get("http://example.com")
