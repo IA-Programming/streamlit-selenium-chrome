@@ -33,11 +33,10 @@ with st.echo():
     driver = get_driver()
     
     @st.cache_data
-    if url:= st.input_text(label="put the url that you want you extract the html code", value="http://example.com", max_chars=100, help="pruepa":
+    if url:= st.input_text(label="put the url that you want you extract the html code", value="http://example.com", max_chars=100, help="pruepa"):
     
         start_time = time()
         driver.get(url)
-        elapsed_time = time() - start_time
-
-        st.markdown(f"### for the extraction of the html code is loaded in {elapsed_time:.2f} seconds")
         st.code(driver.page_source)
+        elapsed_time = time() - start_time
+        st.markdown(f"### for the extraction of the html code is loaded in {elapsed_time:.2f} seconds")
