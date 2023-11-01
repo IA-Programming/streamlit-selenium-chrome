@@ -32,7 +32,7 @@ with st.echo():
     
     driver = get_driver()
     
-    @st.cache_data
+    @st.cache_resource
     if url := st.input_text(label="put the url that you want you extract the html code", value="http://example.com", max_chars=100, help="pruepa"):
     
         start_time = time()
