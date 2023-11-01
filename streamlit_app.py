@@ -27,10 +27,17 @@ with st.echo():
         driver = webdriver.Chrome(options=options)
         end_time = time()
         elapsed_time = end_time - start_time
-        st.write(f"Chrome-driver loaded in {elapsed_time:.4f} seconds")
+        st.write(f"Chrome-driver loaded in {elapsed_time:.2f} seconds")
         return driver
     
     driver = get_driver()
-    driver.get("http://example.com")
+    
+    @st.cache_data
+    if url:= st.input_text(label="put the url that you want you extract the html code", value="http://example.com", max_chars=100, help="pruepa":
+    
+        start_time = time()
+        driver.get(url)
+        elapsed_time = time() - start_time
 
-    st.code(driver.page_source)
+        st.markdown(f"### for the extraction of the html code is loaded in {elapsed_time:.2f} seconds")
+        st.code(driver.page_source)
