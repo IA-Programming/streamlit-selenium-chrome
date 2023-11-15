@@ -17,11 +17,8 @@ with st.echo():
     from selenium.webdriver.support.wait import WebDriverWait
     from selenium.webdriver.chrome.options import Options
 
-    # Set the user agent string for a Debian system
-    user_agent = "Mozilla/5.0 (X11; Linux x86_64; rv:95.0) Gecko/20100101 Firefox/95.0"
-    
     options = Options()
-    options.add_argument(f"user-agent={user_agent}")
+    options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36")
     options.add_argument('--disable-gpu')
     options.add_argument('--headless')
     options.add_argument("--no-sandbox")
