@@ -68,9 +68,7 @@ with st.echo():
                 print('\33[1;34m' + 'Using Selenium Script method' + '\33[0m')
     
                 # Get the HTML content directly from the browser's DOM
-                page_source = driver.execute_script("return document.body.outerHTML;")
-    
-                html_code = driver.page_source
+                html_code = driver.execute_script("return document.body.outerHTML;")e
     
                 # Get the status code using requests library
                 response = requests.get(driver.current_url)
