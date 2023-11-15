@@ -31,56 +31,56 @@ with st.echo():
     
     driver = get_driver()
 
-from bs4 import BeautifulSoup
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.by import By
-
-@st.cache_data
-def ExtrayendoHTML(Url: str, driver: webdriver=driver):
-    response = requests.get(Url)
-    # Check if the request was successful (status code 200)
-    if response.status_code == 200:
-        print('\33[1;32m' + 'Using BeautifulSoup' + '\33[0m')
-        return response
-    else:
-        print('\33[1;33m' + 'Using Selenium' + '\33[0m')
-        driver = web_driver()
-
-        # Cargar la página web
-        driver.get(Url)
-
-        # Esperar a que la página se cargue completamente
-        WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.TAG_NAME, "body"))
-        )  # Esperar hasta x segundos
-
-        html_code = driver.page_source
-
-        # Get the status code using requests library
-        response = requests.get(driver.current_url)
-        # driver.close()
+    from bs4 import BeautifulSoup
+    from selenium.webdriver.support import expected_conditions as EC
+    from selenium.webdriver.common.by import By
+    
+    @st.cache_data
+    def ExtrayendoHTML(Url: str, driver: webdriver=driver):
+        response = requests.get(Url)
+        # Check if the request was successful (status code 200)
         if response.status_code == 200:
-            print("HTML code extracted successfully")
-            return html_code
+            print('\33[1;32m' + 'Using BeautifulSoup' + '\33[0m')
+            return response
         else:
-
-            print('\33[1;34m' + 'Using Selenium Script method' + '\33[0m')
-
-            # Get the HTML content directly from the browser's DOM
-            page_source = driver.execute_script("return document.body.outerHTML;")
-
+            print('\33[1;33m' + 'Using Selenium' + '\33[0m')
+            driver = web_driver()
+    
+            # Cargar la página web
+            driver.get(Url)
+    
+            # Esperar a que la página se cargue completamente
+            WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.TAG_NAME, "body"))
+            )  # Esperar hasta x segundos
+    
             html_code = driver.page_source
-
+    
             # Get the status code using requests library
             response = requests.get(driver.current_url)
-
-            # Validate the status code
+            # driver.close()
             if response.status_code == 200:
                 print("HTML code extracted successfully")
                 return html_code
             else:
-                print(f"Failed to extract HTML code")
-                return html_code
+    
+                print('\33[1;34m' + 'Using Selenium Script method' + '\33[0m')
+    
+                # Get the HTML content directly from the browser's DOM
+                page_source = driver.execute_script("return document.body.outerHTML;")
+    
+                html_code = driver.page_source
+    
+                # Get the status code using requests library
+                response = requests.get(driver.current_url)
+    
+                # Validate the status code
+                if response.status_code == 200:
+                    print("HTML code extracted successfully")
+                    return html_code
+                else:
+                    print(f"Failed to extract HTML code")
+                    return html_code
     
     if url := st.text_input(label="put the url that you want you extract the html code", value="http://example.com", max_chars=100, help="pruepa"):
     
