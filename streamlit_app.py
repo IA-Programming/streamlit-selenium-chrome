@@ -70,6 +70,13 @@ with st.echo():
     
                 result = 'Using Selenium Script method'
                 print('\33[1;34m' + result + '\33[0m')
+
+                driver.get(Url)
+    
+                # Esperar a que la página se cargue completamente
+                WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located((By.TAG_NAME, "body"))
+                )  # Esperar hasta x segundos
     
                 # Get the HTML content directly from the browser's DOM
                 html_code = driver.execute_script("return document.body.outerHTML;")
