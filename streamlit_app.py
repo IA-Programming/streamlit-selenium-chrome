@@ -42,10 +42,12 @@ with st.echo():
         response = requests.get(Url)
         # Check if the request was successful (status code 200)
         if response.status_code == 200:
-            print('\33[1;32m' + result:= 'Using BeautifulSoup' + '\33[0m')
+            result= 'Using BeautifulSoup'
+            print('\33[1;32m' + result + '\33[0m')
             return result, response.text
         else:
-            print('\33[1;33m' + result:= 'Using Selenium' + '\33[0m')
+            result= 'Using Selenium'
+            print('\33[1;33m' + result + '\33[0m')
     
             # Cargar la página web
             driver.get(Url)
@@ -61,11 +63,13 @@ with st.echo():
             response = requests.get(driver.current_url)
             # driver.close()
             if response.status_code == 200:
-                print("HTML code extracted successfully")
+                result= result + ": " + "HTML code extracted successfully"
+                print(result)
                 return result, html_code
             else:
     
-                print('\33[1;34m' + result:= 'Using Selenium Script method' + '\33[0m')
+                result = 'Using Selenium Script method'
+                print('\33[1;34m' + result + '\33[0m')
     
                 # Get the HTML content directly from the browser's DOM
                 html_code = driver.execute_script("return document.body.outerHTML;")
@@ -75,10 +79,12 @@ with st.echo():
     
                 # Validate the status code
                 if response.status_code == 200:
-                    print("HTML code extracted successfully")
+                    result= result + ": " + "HTML code extracted successfully"
+                    print(result)
                     return result, html_code
                 else:
-                    print(f"Failed to extract HTML code")
+                    result= result + ": " + "Failed to extract HTML code"
+                    print(result)
                     return result, html_code
     
     if url := st.text_input(label="put the url that you want you extract the html code", value="http://example.com", max_chars=100, help="pruepa"):
