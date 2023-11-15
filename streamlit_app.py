@@ -46,53 +46,32 @@ with st.echo():
             print('\33[1;32m' + result + '\33[0m')
             return result, response.text
         else:
-            result= 'Using Selenium'
-            print('\33[1;33m' + result + '\33[0m')
-    
-            # Cargar la página web
+
+            result = 'Using Selenium Script method'
+            print('\33[1;34m' + result + '\33[0m')
+
             driver.get(Url)
-    
+
             # Esperar a que la página se cargue completamente
             WebDriverWait(driver, 10).until(
             EC.presence_of_element_located((By.TAG_NAME, "body"))
             )  # Esperar hasta x segundos
-    
-            html_code = driver.page_source
-    
+
+            # Get the HTML content directly from the browser's DOM
+            html_code = driver.execute_script("return document.body.outerHTML;")
+
             # Get the status code using requests library
             response = requests.get(driver.current_url)
-            # driver.close()
+
+            # Validate the status code
             if response.status_code == 200:
                 result= result + ": " + "HTML code extracted successfully"
                 print(result)
                 return result, html_code
             else:
-    
-                result = 'Using Selenium Script method'
-                print('\33[1;34m' + result + '\33[0m')
-
-                driver.get(Url)
-    
-                # Esperar a que la página se cargue completamente
-                WebDriverWait(driver, 10).until(
-                EC.presence_of_element_located((By.TAG_NAME, "body"))
-                )  # Esperar hasta x segundos
-    
-                # Get the HTML content directly from the browser's DOM
-                html_code = driver.execute_script("return document.body.outerHTML;")
-    
-                # Get the status code using requests library
-                response = requests.get(driver.current_url)
-    
-                # Validate the status code
-                if response.status_code == 200:
-                    result= result + ": " + "HTML code extracted successfully"
-                    print(result)
-                    return result, html_code
-                else:
-                    result= result + ": " + "Failed to extract HTML code"
-                    print(result)
-                    return result, html_code
+                result= result + ": " + "Failed to extract HTML code"
+                print(result)
+                return result, html_code
     
     if url := st.text_input(label="put the url that you want you extract the html code", value="http://example.com", max_chars=100, help="pruepa"):
     
