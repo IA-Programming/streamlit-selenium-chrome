@@ -42,7 +42,7 @@ with st.echo():
         # Check if the request was successful (status code 200)
         if response.status_code == 200:
             print('\33[1;32m' + 'Using BeautifulSoup' + '\33[0m')
-            return response
+            return response.text
         else:
             print('\33[1;33m' + 'Using Selenium' + '\33[0m')
             driver = web_driver()
