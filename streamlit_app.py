@@ -42,10 +42,10 @@ with st.echo():
         response = requests.get(Url)
         # Check if the request was successful (status code 200)
         if response.status_code == 200:
-            print('\33[1;32m' + 'Using BeautifulSoup' + '\33[0m')
-            return response.text
+            print('\33[1;32m' + result:= 'Using BeautifulSoup' + '\33[0m')
+            return result, response.text
         else:
-            print('\33[1;33m' + 'Using Selenium' + '\33[0m')
+            print('\33[1;33m' + result:= 'Using Selenium' + '\33[0m')
     
             # Cargar la página web
             driver.get(Url)
@@ -62,10 +62,10 @@ with st.echo():
             # driver.close()
             if response.status_code == 200:
                 print("HTML code extracted successfully")
-                return html_code
+                return result, html_code
             else:
     
-                print('\33[1;34m' + 'Using Selenium Script method' + '\33[0m')
+                print('\33[1;34m' + result:= 'Using Selenium Script method' + '\33[0m')
     
                 # Get the HTML content directly from the browser's DOM
                 html_code = driver.execute_script("return document.body.outerHTML;")
@@ -76,14 +76,16 @@ with st.echo():
                 # Validate the status code
                 if response.status_code == 200:
                     print("HTML code extracted successfully")
-                    return html_code
+                    return result, html_code
                 else:
                     print(f"Failed to extract HTML code")
-                    return html_code
+                    return result, html_code
     
     if url := st.text_input(label="put the url that you want you extract the html code", value="http://example.com", max_chars=100, help="pruepa"):
     
         start_time = time()
-        st.code(ExtrayendoHTML(Url=url))
+        result, html = ExtrayendoHTML(Url=url)
+        st.markdown(result)
+        st.code(html)
         elapsed_time = time() - start_time
         st.markdown(f"### for the extraction of the html code is loaded in {elapsed_time:.2f} seconds")
