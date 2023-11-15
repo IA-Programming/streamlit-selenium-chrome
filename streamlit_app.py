@@ -1,3 +1,4 @@
+import requests
 from time import time
 import streamlit as st
 
