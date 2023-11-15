@@ -14,6 +14,7 @@ Fork this repo, and edit `/streamlit_app.py` to customize this app to your heart
 
 with st.echo():
     from selenium import webdriver
+    from selenium.webdriver.support.wait import WebDriverWait
     from selenium.webdriver.chrome.options import Options
     
     options = Options()
