@@ -45,7 +45,6 @@ with st.echo():
             return response.text
         else:
             print('\33[1;33m' + 'Using Selenium' + '\33[0m')
-            driver = web_driver()
     
             # Cargar la página web
             driver.get(Url)
