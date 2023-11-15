@@ -21,7 +21,7 @@ with st.echo():
     user_agent = "Mozilla/5.0 (X11; Linux x86_64; rv:95.0) Gecko/20100101 Firefox/95.0"
     
     options = Options()
-    chrome_options.add_argument(f"user-agent={user_agent}")
+    options.add_argument(f"user-agent={user_agent}")
     options.add_argument('--disable-gpu')
     options.add_argument('--headless')
     options.add_argument("--no-sandbox")
