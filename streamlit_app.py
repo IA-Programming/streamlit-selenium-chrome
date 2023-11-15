@@ -16,6 +16,7 @@ with st.echo():
     from selenium import webdriver
     from selenium.webdriver.support.wait import WebDriverWait
     from selenium.webdriver.chrome.options import Options
+    from selenium_driver import Driver
 
     options = Options()
     options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36")
@@ -32,14 +33,14 @@ with st.echo():
         st.write(f"Chrome-driver loaded in {elapsed_time:.2f} seconds")
         return driver
     
-    driver = get_driver()
+    driver = Driver()
 
     from bs4 import BeautifulSoup
     from selenium.webdriver.support import expected_conditions as EC
     from selenium.webdriver.common.by import By
     
     @st.cache_data
-    def ExtrayendoHTML(Url: str, driver: webdriver=driver):
+    def ExtrayendoHTML(Url: str, driver=driver):
         response = requests.get(Url)
         # Check if the request was successful (status code 200)
         if response.status_code == 200:
