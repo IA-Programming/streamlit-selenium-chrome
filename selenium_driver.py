@@ -1,5 +1,6 @@
 import logging
 from sys import platform
+import streamlit as st
 
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.chrome.service import Service as ChromeDriverService
@@ -20,6 +21,7 @@ from webdriver_manager.microsoft import EdgeChromiumDriverManager as EdgeDriverM
 
 from typing import Type
 from pathlib import Path
+@st.cache_resource
 def Driver() -> WebDriver:
     """Open a browser window and load a web page using Selenium
 
