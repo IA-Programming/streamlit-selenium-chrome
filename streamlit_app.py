@@ -25,13 +25,12 @@ with st.echo():
     
     @st.cache_resource
     def get_driver():
-        start_time = time()
         driver = webdriver.Chrome(options=options)
-        elapsed_time = time() - start_time
-        st.write(f"Chrome-driver loaded in {elapsed_time:.2f} seconds")
         return driver
-    
+    start_time = time()
     driver = get_driver()
+    elapsed_time = time() - start_time
+    st.write(f"Chrome-driver loaded in {elapsed_time:.2f} seconds")    
 
     from bs4 import BeautifulSoup
     from selenium.webdriver.support import expected_conditions as EC
