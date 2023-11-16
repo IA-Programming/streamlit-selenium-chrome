@@ -93,11 +93,11 @@ with st.echo():
         # Get the Chromium version
         version = driver.capabilities['browserVersion']
         # Print the version
-        st.markdown(f"## Chromium Version: {version}")
+        st.markdown(f"### Chromium Version: {version}")
         # Get the ChromeDriver version
         chrome_driver_version = driver.capabilities['chrome']['chromedriverVersion'].split()[0]
         # Print the ChromeDriver version
-        print(f"## ChromeDriver Version: {chrome_driver_version}")
+        st.markdown(f"### ChromeDriver Version: {chrome_driver_version}")
         st.markdown(result)
         st.code(html)
         elapsed_time = time() - start_time
