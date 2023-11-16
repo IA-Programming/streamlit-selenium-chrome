@@ -16,15 +16,16 @@ with st.echo():
     from selenium import webdriver
     from selenium.webdriver.support.wait import WebDriverWait
     from selenium.webdriver.chrome.options import Options
-
+    
+    options = Options()
+    options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36")
+    options.add_argument('--disable-gpu')
+    options.add_argument('--headless')
+    options.add_argument("--no-sandbox")
+    options.add_experimental_option("detach", True)
+    
     @st.cache_resource
     def get_driver():
-        options = Options()
-        options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36")
-        options.add_argument('--disable-gpu')
-        options.add_argument('--headless')
-        options.add_argument("--no-sandbox")
-        options.add_experimental_option("detach", True)
         start_time = time()
         driver = webdriver.Chrome(options=options)
         elapsed_time = time() - start_time
