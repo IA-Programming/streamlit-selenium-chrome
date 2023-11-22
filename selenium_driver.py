@@ -1,4 +1,4 @@
-import logging
+import os
 from sys import platform
 import streamlit as st
 
@@ -21,7 +21,6 @@ from webdriver_manager.microsoft import EdgeChromiumDriverManager as EdgeDriverM
 from webdriver_manager.core.os_manager import ChromeType
 
 from typing import Type
-from pathlib import Path
 
 @st.cache_resource
 def Driver() -> WebDriver:
@@ -33,7 +32,6 @@ def Driver() -> WebDriver:
     Returns:
         driver (WebDriver): A driver object representing the browser window to scrape
     """
-    logging.getLogger("selenium").setLevel(logging.CRITICAL)
     selenium_web_browser = "chrome"
     selenium_headless = True
     options_available: dict[str, Type[BrowserOptions]] = {
@@ -72,15 +70,20 @@ def Driver() -> WebDriver:
         if selenium_headless:
             options.add_argument("--headless=new")
             options.add_argument("--disable-gpu")
-            # options.add_experimental_option("detach", True)
+            options.add_experimental_option("detach", True)
 
-        chromium_driver_path = Path("/usr/bin/chromedriver").absolute()
+        chromium_driver_path = "/usr/bin/chromedriver"
 
         driver = ChromeDriver(
-            service=ChromeDriverService(executable_path=chromium_driver_path)
-            if chromium_driver_path.exists()
-            else ChromeDriverManager(chrome_type= ChromeType.CHROMIUM).install(),
+            service=ChromeDriverService(executable_path=chromium_driver_path
+            if os.path.exists(chromium_driver_path)
+            else ChromeDriverManager(chrome_type= ChromeType.CHROMIUM).install()),
             options=options,
         )
 
     return driver
+
+# import os
+# from pathlib import Path
+# print('\33[1;31m' + str(Path("/usr/bin/chromedriver").exists()) + '\33[0m')
+# print(str(os.path.exists("/usr/bin/chromedriver")))

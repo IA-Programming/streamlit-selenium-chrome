@@ -10,30 +10,32 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support.wait import WebDriverWait
 from webdriver_manager.core.os_manager import ChromeType
 
+from selenium_driver import Driver
+
 st.set_page_config(page_title="Selenium Web App", page_icon="🌠", layout="wide")
 st.title('🎁 Selenium App To Extract The text', anchor=False)
 
-@st.cache_resource
-def webdriver():
-    if (platform.system() == "Windows"):
-        options = Options()
-        chrome_service = fs.Service(executable_path=ChromeDriverManager().install())
-    else:
-        options = Options()
-        ua = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
-        options.add_argument('--user-agent=' + ua)
-        options.add_argument("--headless")
-        options.add_argument('--disable-gpu')
-        options.add_argument('--no-sandbox')
-        options.add_argument('--disable-dev-shm-usage')
-        chrome_service = fs.Service(executable_path=ChromeDriverManager(chrome_type= ChromeType.CHROMIUM).install())
+# @st.cache_resource
+# def webdriver():
+#     if (platform.system() == "Windows"):
+#         options = Options()
+#         chrome_service = fs.Service(executable_path=ChromeDriverManager().install())
+#     else:
+#         options = Options()
+#         ua = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
+#         options.add_argument('--user-agent=' + ua)
+#         options.add_argument("--headless")
+#         options.add_argument('--disable-gpu')
+#         options.add_argument('--no-sandbox')
+#         options.add_argument('--disable-dev-shm-usage')
+#         chrome_service = fs.Service(executable_path=ChromeDriverManager(chrome_type= ChromeType.CHROMIUM).install())
 
-    browser = WebDriver(options=options,service=chrome_service)
+#     browser = WebDriver(options=options,service=chrome_service)
 
-    return browser
+#     return browser
 
 start_time = time()
-driver = webdriver()
+driver = Driver()
 elapsed_time = time() - start_time
 st.write(f"Chrome-driver loaded in {elapsed_time:.2f} seconds")  
 
