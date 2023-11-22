@@ -18,9 +18,11 @@ from selenium.webdriver.safari.webdriver import WebDriver as SafariDriver
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 from webdriver_manager.microsoft import EdgeChromiumDriverManager as EdgeDriverManager
+from webdriver_manager.core.os_manager import ChromeType
 
 from typing import Type
 from pathlib import Path
+
 @st.cache_resource
 def Driver() -> WebDriver:
     """Open a browser window and load a web page using Selenium
@@ -70,13 +72,14 @@ def Driver() -> WebDriver:
         if selenium_headless:
             options.add_argument("--headless=new")
             options.add_argument("--disable-gpu")
+            # options.add_experimental_option("detach", True)
 
-        chromium_driver_path = Path("/usr/bin/chromedriver")
+        chromium_driver_path = Path("/usr/bin/chromedriver").absolute()
 
         driver = ChromeDriver(
-            service=ChromeDriverService(executable_path=str(chromium_driver_path))
+            service=ChromeDriverService(executable_path=chromium_driver_path)
             if chromium_driver_path.exists()
-            else ChromeDriverManager().install(),
+            else ChromeDriverManager(chrome_type= ChromeType.CHROMIUM).install(),
             options=options,
         )
 
