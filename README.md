@@ -1,6 +1,6 @@
 # Web scraping on Streamlit Cloud with Selenium
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://selenium.streamlit.app/)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://selenium-chrome-final.streamlit.app/)
 
 This is a minimal, reproducible example of how to scrape the web with Selenium and Chrome on Streamlit's Community Cloud. 
 
