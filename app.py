@@ -138,4 +138,5 @@ if Url:= st.text_input(label='Put here your Url', value='http://example.com', ma
         with st.expander('Getting the Text'):
             st.markdown(getext(html=html))
     elapsed_time = time() - start_time
+    st.markdown(f"**Number of open windows: :red[{len(driver.window_handles)}]**")
     st.markdown(f"### for the extraction of the html code is loaded in {elapsed_time:.2f} seconds")
